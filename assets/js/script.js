@@ -55,16 +55,25 @@ function renderEducation() {
   const container = document.getElementById("educationContainer");
   if (!container) return;
 
-  container.innerHTML = portfolioData.education.map((item) => `
-    <div class="timeline-item">
-      <span class="timeline-date">${item.date}</span>
-      <div class="timeline-content">
-        <i class="${item.icon}"></i>
-        <h3>${item.title}</h3>
-        <p>${item.institution}</p>
-        ${item.detail ? `<span>${item.detail}</span>` : ""}
+  container.className = "education-grid reveal";
+  container.innerHTML = portfolioData.education.map((item, index) => `
+    <article class="education-card">
+      <div class="education-year">
+        <span>${item.date.includes("–") ? item.date.split("–")[0].trim() : item.date}</span>
+        <small>${item.date.includes("–") ? "En cours" : "Diplôme obtenu"}</small>
       </div>
-    </div>
+
+      <div class="education-icon">
+        <i class="${item.icon}"></i>
+      </div>
+
+      <div class="education-content">
+        <span class="education-level">${index === 0 ? "Licence" : "Baccalauréat"}</span>
+        <h3>${item.title}</h3>
+        <p><i class="fa-solid ${index === 0 ? "fa-building-columns" : "fa-school"}"></i>${item.institution}</p>
+        ${item.detail ? `<div class="education-tag">${item.detail}</div>` : ""}
+      </div>
+    </article>
   `).join("");
 }
 
