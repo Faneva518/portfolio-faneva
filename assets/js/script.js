@@ -1,3 +1,77 @@
+function renderSkills() {
+  const container = document.getElementById("skillsContainer");
+  if (!container) return;
+
+  container.innerHTML = portfolioData.skills.map((category) => `
+    <article class="skill-category">
+      <h3><i class="${category.icon}"></i> ${category.category}</h3>
+      <div class="skill-list">
+        ${category.items.map((item) => `
+          <div class="skill-card">
+            <i class="${item.icon}"></i>
+            <h4>${item.name}</h4>
+          </div>
+        `).join("")}
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderProjects() {
+  const container = document.getElementById("projectsContainer");
+  if (!container) return;
+
+  container.innerHTML = portfolioData.projects.map((project) => `
+    <article class="project-card reveal">
+      <div class="project-image ${project.imageClass}">
+        <div class="project-image-content">
+          <i class="${project.imageIcon}"></i>
+          <span>${project.imageLabel}</span>
+        </div>
+        <span class="project-number">${project.number}</span>
+      </div>
+
+      <div class="project-info">
+        <span class="project-category">${project.category}</span>
+        <h3>${project.title}</h3>
+        <p>${project.description}</p>
+
+        <div class="project-tags">
+          ${project.tags.map((tag) => `
+            <span><i class="${tag.icon}"></i> ${tag.name}</span>
+          `).join("")}
+        </div>
+
+        <div class="project-footer">
+          <span>${project.footer}</span>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderEducation() {
+  const container = document.getElementById("educationContainer");
+  if (!container) return;
+
+  container.innerHTML = portfolioData.education.map((item) => `
+    <div class="timeline-item">
+      <span class="timeline-date">${item.date}</span>
+      <div class="timeline-content">
+        <i class="${item.icon}"></i>
+        <h3>${item.title}</h3>
+        <p>${item.institution}</p>
+        ${item.detail ? `<span>${item.detail}</span>` : ""}
+      </div>
+    </div>
+  `).join("");
+}
+
+renderSkills();
+renderProjects();
+renderEducation();
+
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 const typing = document.getElementById("typing");
